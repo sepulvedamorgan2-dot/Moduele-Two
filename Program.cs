@@ -36,7 +36,7 @@ if (resp == "1")
             hours[i] = rnd.Next(4, 13);
         }
         // Console.WriteLine($"{dataDate:M/d/yy},{string.Join("|", hours)}");
-        sw.WriteLine($"{dataDate:M/d/yyyy},{string.Join("|", hours)}");
+        sw.WriteLine($"{dataDate:MM/d/yyyy},{string.Join("|", hours)}");
         // add 1 week to date
         dataDate = dataDate.AddDays(7);
     }
@@ -45,5 +45,16 @@ if (resp == "1")
 else if (resp == "2")
 {
     // TODO: parse data file
+    string file = "data.txt";
+    StreamReader sr = new(file);
+    while (!sr.EndOfStream)
+    {
+        string? line = sr.ReadLine();
+        line = line.Substring(11);
+        string[] arr = String.IsNullOrEmpty(line) ? [] : line.Split('|');
+        Console.WriteLine("{0, 2} {1, 2} {2, 2} {3, 2} {4, 2} {5, 2} {6, 2}"
+        , arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
+    }
+    sr.Close();
 
 }
