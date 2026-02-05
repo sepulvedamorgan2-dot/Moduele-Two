@@ -36,7 +36,7 @@ if (resp == "1")
             hours[i] = rnd.Next(4, 13);
         }
         // Console.WriteLine($"{dataDate:M/d/yy},{string.Join("|", hours)}");
-        sw.WriteLine($"{dataDate:MM/d/yyyy},{string.Join("|", hours)}");
+        sw.WriteLine($"{dataDate:MM/dd/yyyy},{string.Join("|", hours)}");
         // add 1 week to date
         dataDate = dataDate.AddDays(7);
     }
@@ -57,12 +57,18 @@ else if (resp == "2")
         line = line.Substring(0, 10);
         string[] arr2 = String.IsNullOrEmpty(line) ? [] : line.Split('/');
         DateTime dateonly = new DateTime(Convert.ToInt32(arr2[2]), Convert.ToInt32(arr2[0]), Convert.ToInt32(arr2[1]));
-        Console.WriteLine("Week of {0:MMM}, {0:dd}, {0:yyyy}", dateonly);
+        //Total
+        int[] intarr = arr.Select(s => Convert.ToInt32(s)).ToArray();
+        int total = intarr[0] + intarr[1] + intarr[2] + intarr[3] + intarr[4] + intarr[5] + intarr[6];
 
-        Console.WriteLine("Su Mo Tu We Th Fr Sa");
-        Console.WriteLine("-- -- -- -- -- -- --");
-        Console.WriteLine("{0, 2} {1, 2} {2, 2} {3, 2} {4, 2} {5, 2} {6, 2}"
-        , arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
+        // int total = Convert.ToInt32(arr[0]) + Convert.ToInt32(arr[1]) + Convert.ToInt32(arr[2]) + Convert.ToInt32(arr[0])
+
+
+        Console.WriteLine("Week of {0:MMM}, {0:dd}, {0:yyyy}", dateonly);
+        Console.WriteLine("Su Mo Tu We Th Fr Sa Tot Avg");
+        Console.WriteLine("-- -- -- -- -- -- -- --- ---");
+        Console.WriteLine("{0, 2} {1, 2} {2, 2} {3, 2} {4, 2} {5, 2} {6, 2}  {7, 2} {8:n1}"
+        , arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6], total, (Convert.ToDouble(total)/7));
     }
     sr.Close();
 
