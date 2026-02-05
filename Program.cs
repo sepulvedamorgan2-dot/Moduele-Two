@@ -50,8 +50,17 @@ else if (resp == "2")
     while (!sr.EndOfStream)
     {
         string? line = sr.ReadLine();
-        line = line.Substring(11);
-        string[] arr = String.IsNullOrEmpty(line) ? [] : line.Split('|');
+        string? linenumber = line.Substring(11);
+        string[] arr = String.IsNullOrEmpty(linenumber) ? [] : linenumber.Split('|');
+
+        //Datetime
+        line = line.Substring(0, 10);
+        string[] arr2 = String.IsNullOrEmpty(line) ? [] : line.Split('/');
+        DateTime dateonly = new DateTime(Convert.ToInt32(arr2[2]), Convert.ToInt32(arr2[0]), Convert.ToInt32(arr2[1]));
+        Console.WriteLine("Week of {0:MMM}, {0:dd}, {0:yyyy}", dateonly);
+
+        Console.WriteLine("Su Mo Tu We Th Fr Sa");
+        Console.WriteLine("-- -- -- -- -- -- --");
         Console.WriteLine("{0, 2} {1, 2} {2, 2} {3, 2} {4, 2} {5, 2} {6, 2}"
         , arr[0], arr[1], arr[2], arr[3], arr[4], arr[5], arr[6]);
     }
